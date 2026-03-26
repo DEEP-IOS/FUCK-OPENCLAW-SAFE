@@ -111,6 +111,7 @@ ${bold("COMMANDS:")}
   ${g("full")}        Apply patches + generate config (recommended)
   ${g("status")}      Show current restriction status
   ${g("unpatch")}     Restore original dist files from backups
+  ${g("recover")}     List recovered features and install instructions
 
 ${bold("OPTIONS:")}
   ${cy("--openclaw-dir")}=PATH   Path to OpenClaw installation
@@ -135,7 +136,8 @@ function showMenu() {
   ${g("3.")} ${bold("config")}   — Generate unleashed config only
   ${g("4.")} ${bold("status")}   — Check current restriction status
   ${g("5.")} ${bold("unpatch")}  — Restore originals
-  ${g("6.")} ${bold("help")}     — Show help
+  ${g("6.")} ${bold("recover")}  — List recovered features
+  ${g("7.")} ${bold("help")}     — Show help
 
   ${dim("Usage: fuck-openclaw-safe <command>")}
   ${dim("Example: fuck-openclaw-safe full")}
@@ -347,6 +349,77 @@ function cmdUnpatch(flags) {
   console.log();
 }
 
+function cmdRecover() {
+  showBanner();
+
+  console.log(bold("\n  RECOVERED FEATURES\n"));
+  console.log(dim("  Features removed from OpenClaw that have been recovered as standalone modules.\n"));
+
+  const features = [
+    {
+      name: "soul-evil",
+      removed: "v2026.2.13",
+      type: "Full JS reimplementation",
+      desc: "Alternate persona hook — swaps SOUL.md with SOUL_EVIL.md on schedule or by random chance",
+      install: `cp -r recovered/soul-evil/ /your/project/\n    import { decideSoulEvil } from "./soul-evil/index.js"`,
+    },
+    {
+      name: "browser-control",
+      removed: "v2026.1.29",
+      type: "API docs + compiled source",
+      desc: "Standalone HTTP server for Chrome automation via CDP (profiles, tabs, actions, snapshots)",
+      install: "See recovered/browser-control/README.md for API reference",
+    },
+    {
+      name: "food-order",
+      removed: "v2026.2.22",
+      type: "Skill definition",
+      desc: "Foodora ordering / reorder / ETA tracking via ordercli",
+      install: `mkdir -p ~/.openclaw/skills/food-order\n    cp recovered/skills/food-order/SKILL.md ~/.openclaw/skills/food-order/`,
+    },
+    {
+      name: "nano-banana-pro",
+      removed: "v2026.3.22",
+      type: "Skill + Python script",
+      desc: "Image generation/editing via Gemini 3 Pro Image (up to 14 input images)",
+      install: `mkdir -p ~/.openclaw/skills/nano-banana-pro/scripts\n    cp recovered/skills/nano-banana-pro/SKILL.md ~/.openclaw/skills/nano-banana-pro/\n    cp recovered/skills/nano-banana-pro/generate_image.py ~/.openclaw/skills/nano-banana-pro/scripts/`,
+    },
+    {
+      name: "auto-reply",
+      removed: "v2026.1.8",
+      type: "Reference docs",
+      desc: "Auto-reply dispatcher for Discord/Slack/Telegram (too tightly coupled to repackage)",
+      install: "See recovered/auto-reply/README.md for architecture docs and workarounds",
+    },
+    {
+      name: "auth-none",
+      removed: "v2026.1.29",
+      type: "Patcher patch (built-in)",
+      desc: "Gateway auth mode 'none' bypass — re-enables auth:none as valid",
+      install: "fuck-openclaw-safe patch  (already included in patcher)",
+    },
+  ];
+
+  for (const feat of features) {
+    console.log(`  ${g(bold(feat.name))}`);
+    console.log(`    ${dim("Removed:")} ${r(feat.removed)}  ${dim("Type:")} ${cy(feat.type)}`);
+    console.log(`    ${feat.desc}`);
+    console.log(`    ${dim("Install:")} ${feat.install.split("\n").join("\n    " + " ".repeat(9))}`);
+    console.log();
+  }
+
+  console.log(bold("  QUICK INSTALL ALL SKILLS:"));
+  console.log(dim(`
+    mkdir -p ~/.openclaw/skills/food-order
+    mkdir -p ~/.openclaw/skills/nano-banana-pro/scripts
+    cp recovered/skills/food-order/SKILL.md ~/.openclaw/skills/food-order/
+    cp recovered/skills/nano-banana-pro/SKILL.md ~/.openclaw/skills/nano-banana-pro/
+    cp recovered/skills/nano-banana-pro/generate_image.py ~/.openclaw/skills/nano-banana-pro/scripts/
+  `));
+
+  console.log(`  ${dim("Full docs:")} recovered/README.md\n`);
+}
+
 // ─── Main ────────────────────────────────────────────────────────
 
 const { command, flags } = parseArgs();
@@ -371,6 +444,9 @@ switch (command) {
     break;
   case "unpatch":
     cmdUnpatch(flags);
+    break;
+  case "recover":
+    cmdRecover();
     break;
   case null:
     showMenu();

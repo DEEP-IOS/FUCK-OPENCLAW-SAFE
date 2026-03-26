@@ -130,6 +130,21 @@ Flags: `--openclaw-dir=PATH`, `--dry-run`, `--verbose`
 
 ACP protocol, Agent-to-Agent messaging, cross-provider messaging, session visibility (all), elevated tools, exec host mode, loop detection, canvas host, browser proxy, OpenAI-compatible endpoint, all 6 chat commands (/bash, /config, /mcp, /plugins, /debug, /restart), hooks, QMD session memory, auto-capture, multimodal search, Discord/Slack/Matrix bot integration, DM policy (open), group policy (open), and more.
 
+## Recovered Features
+
+Some removed features have been recovered as standalone modules in the `recovered/` directory. Run `fuck-openclaw-safe recover` to see install instructions.
+
+| Feature | What It Does | Recovery Type |
+|---------|-------------|---------------|
+| [soul-evil](./recovered/soul-evil/) | Alternate persona hook — swaps SOUL.md with SOUL_EVIL.md on schedule or by chance | Full JS reimplementation |
+| [browser-control](./recovered/browser-control/) | Standalone HTTP server for Chrome automation via CDP | API docs + compiled source |
+| [food-order](./recovered/skills/food-order/) | Foodora ordering/reorder/ETA tracking via ordercli | Skill definition (SKILL.md) |
+| [nano-banana-pro](./recovered/skills/nano-banana-pro/) | Image generation/editing via Gemini 3 Pro Image | Skill + Python script |
+| [auto-reply](./recovered/auto-reply/) | Auto-reply dispatcher for Discord/Slack/Telegram | Reference docs (too coupled) |
+| auth-none | Gateway auth mode "none" bypass | Patcher patch (built-in) |
+
+See [`recovered/README.md`](./recovered/README.md) for install instructions.
+
 ## Features OpenClaw Killed (Can't Restore)
 
 Some features were completely removed from the codebase (confirmed in changelog):

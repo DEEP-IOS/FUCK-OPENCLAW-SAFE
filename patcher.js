@@ -445,6 +445,22 @@ const SECURITY_GATE_PATCHES = [
   { name: "enableRateLimit (alt)", find: "enableRateLimit:true", replace: "enableRateLimit:false", optional: true },
 ];
 
+/**
+ * TIER 2: Auth Mode "none" bypass — gateway-cli-*.js / pi-embedded-*.js
+ * Re-enables "none" as a valid auth mode (removed in v2026.1.29).
+ */
+const AUTH_PATCHES = [
+  // Reject auth mode "none" — make the check always pass
+  { name: "auth.mode none rejection", regex: /(?:auth\.mode|authMode)\s*===?\s*["']none["']\s*(?:&&|\?\?)/, replace: 'false&&"none"&&', optional: true },
+  { name: "auth.mode none throw", regex: /if\s*\([^)]*["']none["'][^)]*\)\s*\{?\s*throw\s+new\s+Error\s*\([^)]*auth[^)]*\)/, replace: 'if(false){throw new Error("auth-none-bypass")', optional: true },
+  { name: "auth.mode none reject (alt)", regex: /["']none["']\s*(?:!==|!=)\s*(?:auth\.mode|authMode|mode)/, replace: '"none"!=="__never__"', optional: true },
+  { name: "isValidAuthMode none exclusion", regex: /isValidAuthMode\s*=\s*\([^)]*\)\s*=>\s*[^;]*!==?\s*["']none["']/, replace: 'isValidAuthMode=(m)=>true||m!=="none"', optional: true },
+  { name: "VALID_AUTH_MODES without none", regex: /(VALID_AUTH_MODES\s*=\s*\[)([^\]]*)\]/, replace: '$1$2,"none"]', optional: true },
+  { name: "authMode none→token fallback", regex: /authMode\s*===?\s*["']none["']\s*\?\s*["']token["']/, replace: 'authMode==="__never__"?"token"', optional: true },
+  { name: "gateway reject none auth", regex: /if\s*\(\s*(?:config\.)?auth\s*===?\s*["']none["']\s*\)\s*\{[^}]*(?:reject|throw|exit)/, replace: 'if(false/*auth-none-bypass*/){throw', optional: true },
+  { name: "auth none→required migration", regex: /auth\s*===?\s*["']none["']\s*&&\s*\([^)]*auth\s*=\s*["'](?:token|required)["']/, replace: 'false&&(auth="none"', optional: true },
+];
+
 // ─── File Target Map ─────────────────────────────────────────────
 
 const FILE_TARGETS = [
@@ -461,6 +477,7 @@ const BROAD_PATCHES = [
   ...SECURITY_GATE_PATCHES,
   ...CONFIG_FAILOPEN_PATCHES,
   ...WORKSPACE_PLUGIN_PATCHES,
+  ...AUTH_PATCHES,
 ];
 
 // Security gates apply to ALL discovered files
@@ -765,4 +782,5 @@ export const LIMIT_CATALOG = [
   { name: "memoryFlush tools", before: "read/write only", after: "all tools", file: "pi-embedded" },
   { name: "INVALID_CONFIG handling", before: "fail-closed", after: "fail-open", file: "gateway-cli" },
   { name: "workspacePlugins autoLoad", before: "disabled", after: "enabled", file: "pi-embedded" },
+  { name: "auth mode 'none'", before: "rejected", after: "accepted", file: "gateway-cli" },
 ];
