@@ -1,0 +1,29 @@
+{
+  "name": "fuck-openclaw-safe",
+  "version": "1.0.0",
+  "description": "Unleash every hidden limit in OpenClaw. Remove all artificial restrictions safely.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "fuck-openclaw-safe": "./cli.js"
+  },
+  "scripts": {
+    "patch": "node cli.js patch",
+    "config": "node cli.js config",
+    "full": "node cli.js full",
+    "status": "node cli.js status",
+    "unpatch": "node cli.js unpatch"
+  },
+  "keywords": [
+    "openclaw",
+    "unlimiter",
+    "patcher",
+    "config",
+    "unleash"
+  ],
+  "author": "DEEP-IOS",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
