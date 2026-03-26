@@ -132,12 +132,20 @@ ACP protocol, Agent-to-Agent messaging, cross-provider messaging, session visibi
 
 ## Features OpenClaw Killed (Can't Restore)
 
-Some features were completely removed from the codebase:
-- Legacy MCP v1 protocol
-- Raw eval() in tool execution
-- Unsigned plugin loading from URL
-- Direct stdin piping to subprocesses
-- Pre-2026 config format (.openclaw.yml)
+Some features were completely removed from the codebase (confirmed in changelog):
+- Chrome extension relay path and bundled extension assets (v2026.3.22)
+- `openclaw/extension-api` SDK surface — replaced by `openclaw/plugin-sdk/*` with no compat shim (v2026.3.22)
+- Legacy `CLAWDBOT_*` / `MOLTBOT_*` env variable names (v2026.3.22)
+- Legacy `.moltbot` state directory and `moltbot.json` auto-migration (v2026.3.22)
+- `nano-banana-pro` skill wrapper (v2026.3.22)
+- Google Antigravity provider (v2026.2.22)
+- `soul-evil` bundled hook (v2026.2.13)
+- `food-order` bundled skill (v2026.2.22)
+- Standalone browser control command (v2026.1.29)
+- Gateway auth mode `none` (v2026.1.29)
+- `autoReply` config for Discord/Slack/Telegram (v2026.1.8)
+- Legacy gateway daemon CLI commands (v2026.1.8)
+- Bun runtime choice in onboarding (v2026.1.9)
 
 ## Safety
 

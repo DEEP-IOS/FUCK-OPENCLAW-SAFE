@@ -128,12 +128,20 @@ ACP 协议、Agent 间通信、跨 Provider 消息、会话可见性（全局）
 
 ## 被 OpenClaw 彻底删除的功能（无法恢复）
 
-某些功能已从代码库中完全移除：
-- Legacy MCP v1 协议
-- 工具执行中的原始 eval()
-- 从 URL 加载未签名插件
-- 直接 stdin 管道到子进程
-- 2026 年之前的配置格式（.openclaw.yml）
+某些功能已从代码库中完全移除（已在 changelog 中确认）：
+- Chrome 浏览器扩展中继路径和打包资源（v2026.3.22）
+- `openclaw/extension-api` SDK — 已被 `openclaw/plugin-sdk/*` 替代，无兼容层（v2026.3.22）
+- 旧版 `CLAWDBOT_*` / `MOLTBOT_*` 环境变量名（v2026.3.22）
+- 旧版 `.moltbot` 状态目录和 `moltbot.json` 自动迁移（v2026.3.22）
+- `nano-banana-pro` 技能包（v2026.3.22）
+- Google Antigravity 模型供应商（v2026.2.22）
+- `soul-evil` 内置 hook（v2026.2.13）
+- `food-order` 内置技能（v2026.2.22）
+- 独立浏览器控制命令（v2026.1.29）
+- Gateway 认证模式 `none`（v2026.1.29）
+- Discord/Slack/Telegram 的 `autoReply` 配置（v2026.1.8）
+- 旧版 Gateway Daemon CLI 命令（v2026.1.8）
+- Bun 运行时选项（v2026.1.9）
 
 ## 安全性
 
