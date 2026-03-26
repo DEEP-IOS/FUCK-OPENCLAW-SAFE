@@ -5,3 +5,5 @@ node_modules/
 Thumbs.db
 *.bak.original
 .npmrc
+version-archive/
+old-versions/
