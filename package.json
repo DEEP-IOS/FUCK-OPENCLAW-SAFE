@@ -1,11 +1,11 @@
 {
-  "name": "fuck-openclaw-safe",
+  "name": "f-ck-openclaw-safe",
   "version": "1.0.0",
   "description": "Unleash every hidden limit in OpenClaw. Remove all artificial restrictions safely.",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "fuck-openclaw-safe": "./cli.js"
+    "f-ck-openclaw-safe": "./cli.js"
   },
   "scripts": {
     "patch": "node cli.js patch",

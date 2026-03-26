@@ -9,7 +9,7 @@
 ## One Command. That's It.
 
 ```bash
-npx fuck-openclaw-safe full
+npx f-ck-openclaw-safe full
 ```
 
 280+ restrictions gone. Restart OpenClaw. Done.
@@ -58,16 +58,16 @@ Every single one is a hardcoded value that OpenClaw's team intentionally set.
 
 | Mode | Command | What it does |
 |------|---------|-------------|
-| **patch** | `fuck-openclaw-safe patch` | Rewrites hardcoded limits in dist files |
-| **config** | `fuck-openclaw-safe config` | Generates `openclaw.json` enabling 48 disabled features |
-| **full** | `fuck-openclaw-safe full` | Both at once **(recommended)** |
+| **patch** | `f-ck-openclaw-safe patch` | Rewrites hardcoded limits in dist files |
+| **config** | `f-ck-openclaw-safe config` | Generates `openclaw.json` enabling 48 disabled features |
+| **full** | `f-ck-openclaw-safe full` | Both at once **(recommended)** |
 
 Additional commands:
 
 | Command | Description |
 |---------|-------------|
-| `fuck-openclaw-safe status` | Show current restriction status |
-| `fuck-openclaw-safe unpatch` | Restore originals from backup |
+| `f-ck-openclaw-safe status` | Show current restriction status |
+| `f-ck-openclaw-safe unpatch` | Restore originals from backup |
 
 Flags: `--openclaw-dir=PATH`, `--dry-run`, `--verbose`
 
@@ -142,7 +142,7 @@ Some features were completely removed from the codebase:
 ## Safety
 
 - All originals backed up as `*.bak.original`
-- `fuck-openclaw-safe unpatch` restores instantly
+- `f-ck-openclaw-safe unpatch` restores instantly
 - All patches are `optional: true` — version mismatches skip, never crash
 - Prefix-based file discovery — works on ANY OpenClaw 2026.x
 - `--dry-run` to preview everything first
@@ -155,7 +155,7 @@ Some features were completely removed from the codebase:
 
 **Patch doesn't match?** Skipped with warning. Never fails.
 
-**How to undo?** `fuck-openclaw-safe unpatch`
+**How to undo?** `f-ck-openclaw-safe unpatch`
 
 ---
 
