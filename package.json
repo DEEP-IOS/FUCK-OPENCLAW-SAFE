@@ -1,6 +1,6 @@
 {
   "name": "f-ck-openclaw-safe",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Unleash every hidden limit in OpenClaw. Remove all artificial restrictions safely.",
   "main": "index.js",
   "type": "module",
