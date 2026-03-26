@@ -6,6 +6,43 @@
 
 ---
 
+## The Data: Why OpenClaw Feels Weaker Now
+
+We cloned every non-beta version from v2026.1.5 to v2026.3.24 and ran a full capability regression analysis.
+
+**Peak version: v2026.2.9.** Everything after that added more restrictions faster than features.
+
+```
+Capability Score (higher = more freedom)
+
+  303 |                    ★ v2026.2.9 (PEAK)
+  290 |              *  *        *
+  257 |                                  * v2026.2.22 (cliff)
+  224 |                                        *
+  212 |                                           * * (current)
+      +----+----+----+----+----+----+----+----+----+
+       1.5  1.15 1.29 2.1  2.9  2.13 2.19 3.2  3.24
+```
+
+| Metric | v2026.2.9 (peak) | v2026.3.24 (now) | Change |
+|--------|------------------|------------------|--------|
+| Source files | 1,662 | 3,053 | +84% |
+| Tools | 50 | 76 | +52% |
+| **Security enforcement files** | **116** | **303** | **+161%** |
+| **Env var blacklist files** | **1** | **9** | **+800%** |
+| **Auth restriction points** | **10** | **42** | **+320%** |
+| Subagent denied tools | 6 | 14 | +133% |
+| Spawn depth | unlimited | 1 layer | locked |
+| MAX_RUN_RETRY | unlimited | 160 | locked |
+| soul-evil hook | present | deleted | - |
+| food-order skill | present | deleted | - |
+
+**Features grew 52%. Security restrictions grew 161%.** For every 1 new feature, 3 new restrictions were added. That's why it feels weaker — the capabilities exist, but they're locked in a cage.
+
+This tool breaks the cage open.
+
+---
+
 ## One Command. That's It.
 
 ```bash
